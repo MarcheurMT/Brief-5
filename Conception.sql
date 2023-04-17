@@ -2,8 +2,8 @@
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- HÃ´te : localhost:3306
--- GÃ©nÃ©rÃ© le : mer. 12 avr. 2023 Ã  13:47
+-- Hôte : localhost:3306
+-- Généré le : mer. 12 avr. 2023 à 13:47
 -- Version du serveur : 5.7.24
 -- Version de PHP : 7.3.2
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de donnÃ©es : `federation_sport`
+-- Base de données : `federation_sport`
 --
 
 -- --------------------------------------------------------
@@ -34,7 +34,7 @@ CREATE TABLE `admnistrateur` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- DÃ©chargement des donnÃ©es de la table `admnistrateur`
+-- Déchargement des données de la table `admnistrateur`
 --
 
 INSERT INTO `admnistrateur` (`id_admin`, `login`, `password`) VALUES
@@ -63,17 +63,18 @@ CREATE TABLE `assurances` (
   `id_assurance` int(11) NOT NULL,
   `assurance` varchar(50) NOT NULL,
   `Pays` varchar(50) NOT NULL,
-  `adresse` varchar(50) NOT NULL,
+  `id_adresse` int(11) DEFAULT NULL,
+  `id_ville` int(11) DEFAULT NULL,
   `tel` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- DÃ©chargement des donnÃ©es de la table `assurances`
+-- Déchargement des données de la table `assurances`
 --
 
-INSERT INTO `assurances` (`id_assurance`, `assurance`, `Pays`, `adresse`, `tel`) VALUES
-(1, 'Assurix', 'France', '9 PLACE DES ECOLES, 86270 Coussay-les-bois', '+33 6 54 55 55 56'),
-(2, 'VitalFish', 'Pays-Bas', 'Den Ham 23A, 2771 WX Boskoop', '+45 55 21 21 21');
+INSERT INTO `assurances` (`id_assurance`, `assurance`, `Pays`, `tel`) VALUES
+(1, 'Assurix', 'France', '+33 6 54 55 55 56'),
+(2, 'VitalFish', 'Pays-Bas', '+45 55 21 21 21');
 
 -- --------------------------------------------------------
 
@@ -85,6 +86,7 @@ CREATE TABLE `club` (
   `id_club` int(11) NOT NULL,
   `club` varchar(50) NOT NULL,
   `id_adresse` int(11) DEFAULT NULL,
+  `id_assurance` int(11) DEFAULT NULL,
   `n_casier` varchar(50) NOT NULL,
   `n_salle` varchar(50) NOT NULL,
   `n_type_m` varchar(50) NOT NULL,
@@ -98,13 +100,13 @@ CREATE TABLE `club` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- DÃ©chargement des donnÃ©es de la table `club`
+-- Déchargement des données de la table `club`
 --
 
-INSERT INTO `club` (`id_club`, `club`, `id_adresse`, `n_casier`, `n_salle`, `n_type_m`, `n_m_cardio`, `n_clims_s`, `n_clims_sp`, `n_toilettes`, `n_douches`, `n_saunas`, `n_place_p`) VALUES
-(1, 'L.Santos mountain park', NULL, '200', '10 de 25mÂ²', '2*25', '40', '2', '10', '5', '10', '2', '50'),
-(2, 'Fleeca fit', NULL, '100', '5 de 30mÂ²', '2*20', '30', '1', '5', '2', '2', '0', '5'),
-(4, 'Diamond goal', NULL, '50', '5 de 30mÂ²', '2*15', '15', '1', '10', '3', '3', '1', '5');
+INSERT INTO `club` (`id_club`, `club`, `n_casier`, `n_salle`, `n_type_m`, `n_m_cardio`, `n_clims_s`, `n_clims_sp`, `n_toilettes`, `n_douches`, `n_saunas`, `n_place_p`) VALUES
+(1, 'L.Santos mountain park', '200', '10 de 25m²', '2*25', '40', '2', '10', '5', '10', '2', '50'),
+(2, 'Fleeca fit', '100', '5 de 30m²', '2*20', '30', '1', '5', '2', '2', '0', '5'),
+(4, 'Diamond goal', '50', '5 de 30m²', '2*15', '15', '1', '10', '3', '3', '1', '5');
 
 -- --------------------------------------------------------
 
@@ -127,22 +129,26 @@ CREATE TABLE `medecins` (
   `id_medecin` int(11) NOT NULL,
   `medecin` varchar(50) NOT NULL,
   `pays` varchar(50) NOT NULL,
-  `adress` varchar(255) NOT NULL,
+  `id_adresse` int(11) DEFAULT NULL,
   `tel` varchar(50) NOT NULL,
   `mail` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- DÃ©chargement des donnÃ©es de la table `medecins`
+-- Déchargement des données de la table `medecins`
 --
 
-INSERT INTO `medecins` (`id_medecin`, `medecin`, `pays`, `adress`, `tel`, `mail`) VALUES
-(1, 'Agatha Duggan', 'France', '6 Rue de la TisonniÃ¨re, 85500 Les Herbiers', '+33 6 78 54 32 89', 'A.Dug@gmail.com'),
-(2, 'Karim Jonas', 'Pays-Bas', 'Busch 12, 1562 HH Krommenie', '+45 13 46 79 82', 'inconnu'),
-(3, 'Sacha Martinez', 'France', 'La FrÃ©tiÃ¨re, 85500 Les Herbiers', '+33 6 11 56 84 93', 'Samar@hotmail.com');
+INSERT INTO `medecins` (`id_medecin`, `medecin`, `pays`, `tel`, `mail`) VALUES
+(1, 'Agatha Duggan', 'France', '+33 6 78 54 32 89', 'A.Dug@gmail.com'),
+(2, 'Karim Jonas', 'Pays-Bas', '+45 13 46 79 82', 'inconnu'),
+(3, 'Sacha Martinez', 'France','+33 6 11 56 84 93', 'Samar@hotmail.com');
 
 -- --------------------------------------------------------
-
+CREATE TABLE `medical` (
+  `id_medical` int(11) NOT NULL,
+  `date_certificat_medical` int(30),
+  `id_medecin` int(11) DEFAULT NULL
+  ) ENGINE= InnoDB DEFAULT CHARSET=utf8mb4;
 --
 -- Structure de la table `sportif`
 --
@@ -156,17 +162,20 @@ CREATE TABLE `sportif` (
   `date_n` varchar(200) NOT NULL,
   `statut` varchar(255) DEFAULT NULL,
   `id_medical` int(11) DEFAULT NULL,
-  `id_adresse` int(11) DEFAULT NULL
+  `id_adresse` int(11) DEFAULT NULL,
+  `id_assurance` 	int(11) DEFAULT NULL,
+  `id_club`		  int(11) DEFAULT NULL,
+  `id_statut` 		int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- DÃ©chargement des donnÃ©es de la table `sportif`
+-- Déchargement des données de la table `sportif`
 --
 
-INSERT INTO `sportif` (`id_sportif`, `nom_sportif`, `prenom_sportif`, `telephone_sportif`, `mail_sportif`, `date_n`, `statut`, `id_medical`, `id_adresse`) VALUES
-(1, 'Clinton', 'Nicolas', '+33 6 42 06 97 55', 'musclefit@yahoo.com', '20/04/1995', 'coach diamond goal', NULL, NULL),
-(2, 'Bellic', 'Lamar', '+45 11 52 75 63', 'imporage@gmail.com', '19/04/1978', 'premium international', NULL, NULL),
-(3, 'Jakowski', 'Franklin', '+33 6 55 48 75 65', 'frajaski@aol.com', '09/04/1970', 'VIP', NULL, NULL);
+INSERT INTO `sportif` (`id_sportif`, `nom_sportif`, `prenom_sportif`, `telephone_sportif`, `mail_sportif`, `date_n`, `statut`) VALUES
+(1, 'Clinton', 'Nicolas', '+33 6 42 06 97 55', 'musclefit@yahoo.com', '20/04/1995', 'coach diamond goal'),
+(2, 'Bellic', 'Lamar', '+45 11 52 75 63', 'imporage@gmail.com', '19/04/1978', 'premium international'),
+(3, 'Jakowski', 'Franklin', '+33 6 55 48 75 65', 'frajaski@aol.com', '09/04/1970', 'VIP');
 
 -- --------------------------------------------------------
 
@@ -182,7 +191,7 @@ CREATE TABLE `statut` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- DÃ©chargement des donnÃ©es de la table `statut`
+-- Déchargement des données de la table `statut`
 --
 
 INSERT INTO `statut` (`id_statut`, `statut`, `prix`, `n_mois`) VALUES
@@ -190,14 +199,14 @@ INSERT INTO `statut` (`id_statut`, `statut`, `prix`, `n_mois`) VALUES
 (2, 'premium version international', '175', '12'),
 (3, 'premium', '150', '12'),
 (4, 'cycliste international', '150', '12'),
-(5, 'cycliste d\'eau douce', '100', '12'),
+(5, "cycliste d'eau douce", '100', '12'),
 (6, 'le muscle est partout', '150', '12'),
 (7, 'membre international', '135', '12'),
 (8, 'brain-l fit international', '130', '12'),
 (9, 'b less-fit', '125', '12'),
 (10, 'membre', '100', '12'),
 (11, 'coach', '50', '12'),
-(12, 'agent de nettoyage et de sÃ©curitÃ©', 'null', 'null');
+(12, 'agent de nettoyage et de sécurité', 'null', 'null');
 
 -- --------------------------------------------------------
 
@@ -210,8 +219,7 @@ CREATE TABLE `temps_machine` (
   `horaire_d` varchar(15) NOT NULL,
   `horaire_f` varchar(15) NOT NULL,
   `id_club` int(11) DEFAULT NULL,
-  `id_utilisateur` int(11) DEFAULT NULL,
-  `id_machine` int(11) DEFAULT NULL,
+  `id_sportif` int(11) DEFAULT NULL,
   `nrj_generer` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -228,7 +236,7 @@ CREATE TABLE `ville` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Index pour les tables dÃ©chargÃ©es
+-- Index pour les tables déchargées
 --
 
 --
@@ -254,8 +262,7 @@ ALTER TABLE `assurances`
 -- Index pour la table `club`
 --
 ALTER TABLE `club`
-  ADD PRIMARY KEY (`id_club`),
-  ADD KEY `fk_id_adresse` (`id_adresse`);
+  ADD PRIMARY KEY (`id_club`);
 
 --
 -- Index pour la table `code_postal`
@@ -274,7 +281,11 @@ ALTER TABLE `medecins`
 --
 ALTER TABLE `sportif`
   ADD PRIMARY KEY (`id_sportif`),
-  ADD KEY `fk_id_adresse_sportif` (`id_adresse`);
+  ADD KEY `fk_sportif_id_medical` (`id_medical`),
+  ADD KEY `fk_sportif_id_adresse` (`id_adresse`),
+  ADD KEY `fk_sportif_id_assurance` (`id_assurance`),
+  ADD KEY `fk_sportif_id_club` (`id_club`),
+  ADD KEY `fk_sportif_id_statut` (`id_statut`);
 
 --
 -- Index pour la table `statut`
@@ -292,11 +303,10 @@ ALTER TABLE `temps_machine`
 -- Index pour la table `ville`
 --
 ALTER TABLE `ville`
-  ADD PRIMARY KEY (`id_ville`),
-  ADD KEY `fk_id_code_postal` (`id_code_postal`);
+  ADD PRIMARY KEY (`id_ville`);
 
 --
--- AUTO_INCREMENT pour les tables dÃ©chargÃ©es
+-- AUTO_INCREMENT pour les tables déchargées
 --
 
 --
@@ -340,7 +350,6 @@ ALTER TABLE `medecins`
 --
 ALTER TABLE `sportif`
   MODIFY `id_sportif` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
 --
 -- AUTO_INCREMENT pour la table `statut`
 --
@@ -351,7 +360,9 @@ ALTER TABLE `statut`
 -- AUTO_INCREMENT pour la table `temps_machine`
 --
 ALTER TABLE `temps_machine`
-  MODIFY `id_temps_machines` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_temps_machines` int(11) NOT NULL AUTO_INCREMENT,
+  ADD CONSTRAINT `fk_id_club` FOREIGN KEY (`id_club`) REFERENCES `club` (`id_club`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_id_sportif` FOREIGN KEY (`id_sportif`) REFERENCES `sportif` (`id_sportif`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
 -- AUTO_INCREMENT pour la table `ville`
@@ -360,34 +371,52 @@ ALTER TABLE `ville`
   MODIFY `id_ville` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- Contraintes pour les tables dÃ©chargÃ©es
+-- Contraintes pour les tables déchargées
 --
 
 --
 -- Contraintes pour la table `adresse`
 --
 ALTER TABLE `adresse`
-  ADD CONSTRAINT `fk_id_ville` FOREIGN KEY (`id_ville`) REFERENCES `ville` (`id_ville`) ON DELETE SET NULL ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_adresse_id_ville` FOREIGN KEY (`id_ville`) REFERENCES `ville` (`id_ville`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `club`
 --
 ALTER TABLE `club`
-  ADD CONSTRAINT `fk_id_adresse` FOREIGN KEY (`id_adresse`) REFERENCES `adresse` (`id_adresse`) ON DELETE SET NULL ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_club_id_adresse` FOREIGN KEY (`id_adresse`) REFERENCES `adresse` (`id_adresse`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_club_id_assurance` FOREIGN KEY (`id_assurance`) REFERENCES `assurances` (`id_assurance`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `sportif`
 --
 ALTER TABLE `sportif`
-  ADD CONSTRAINT `fk_id_adresse_sportif` FOREIGN KEY (`id_adresse`) REFERENCES `adresse` (`id_adresse`) ON DELETE SET NULL ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_sportif_id_adresse` FOREIGN KEY (`id_adresse`) REFERENCES `adresse` (`id_adresse`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_sportif_id_assurance` FOREIGN KEY (`id_assurance`) REFERENCES `assurances` (`id_assurance`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_sportif_id_club` FOREIGN KEY (`id_club`) REFERENCES `club` (`id_club`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_sportif_id_statut` FOREIGN KEY (`id_statut`) REFERENCES `statut` (`id_statut`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
+
+
+  ALTER TABLE `ville`
+  ADD CONSTRAINT `fk_id_code_postal` FOREIGN KEY (`id_code_postal`) REFERENCES `code_postal` (`id_code_postal`) ON DELETE SET NULL ON UPDATE CASCADE;
+
 -- Contraintes pour la table `ville`
 --
-ALTER TABLE `ville`
-  ADD CONSTRAINT `fk_id_code_postal` FOREIGN KEY (`id_code_postal`) REFERENCES `code_postal` (`id_code_postal`) ON DELETE SET NULL ON UPDATE CASCADE;
-COMMIT;
+ALTER TABLE `assurances`
+  ADD CONSTRAINT `fk_assurance_id_ville` FOREIGN KEY (`id_ville`) REFERENCES `ville` (`id_ville`) ON DELETE SET NULL ON UPDATE CASCADE;
+--
+-- 
+--
+  ALTER TABLE `medical`
+    ADD CONSTRAINT `fk_medical_id_medecin` FOREIGN KEY (`id_medecin`) REFERENCES `medecins` (`id_medecin`) ON DELETE SET NULL ON UPDATE CASCADE;
 
+
+--
+
+  ALTER TABLE `ville`
+  ADD CONSTRAINT `fk_ville_id_code_postal` FOREIGN KEY (`id_code_postal`) REFERENCES `code_postal` (`id_code_postal`) ON DELETE SET NULL ON UPDATE CASCADE;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
