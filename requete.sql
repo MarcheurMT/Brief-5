@@ -10,17 +10,17 @@ where nom_sportif like 'Jakowski'
 
 -- renvoie le nom et l'adresse de l'id 1 dans la table sportif
 
-select nom_sportif, adresse_sportif
+select nom_sportif, id_adresse
 from sportif
-where id=1
+where id_sportif="1"
 
 -- 
 
-select statut_A, n_mois
+select statut, n_mois
 from statut
 where id_statut = statut.id
-and  prix >= 100
+and  prix <= 100
 
--- jointure Ã  faire a partir de statut:
+-- jointure à faire a partir de statut:
 
-select nom_sportif, prenom_sportif, club, adress from club join adresse using(id_adresse) join sportif using(id_sportif)
+select nom_sportif, prenom_sportif, club, adress from club join adresse using (id_adresse) join sportif using (id_sportif)
