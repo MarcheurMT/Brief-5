@@ -412,7 +412,7 @@ ALTER TABLE `assurances`
   ALTER TABLE `medical`
     ADD CONSTRAINT `fk_medical_id_medecin` FOREIGN KEY (`id_medecin`) REFERENCES `medecins` (`id_medecin`) ON DELETE SET NULL ON UPDATE CASCADE;
 
-ALTER TABLE `medecin`
+ALTER TABLE `medecins`
     ADD CONSTRAINT `fk_medecin_id_adresse` FOREIGN KEY (`id_adresse`) REFERENCES `adresse` (`id_adresse`) ON DELETE SET NULL ON UPDATE CASCADE;
 --
 
